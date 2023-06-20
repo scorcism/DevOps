@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>System Monitoring</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>System Monitoring</h1>
+        <div class="" style="display: flex; justify-content: space-evenly; flex-direction: column; background-color: wheat;">
+
+            <div style="display: block; height: 20px; background-color: rgb(202, 69, 69);" id="cpu-gauge">{{cpu_percent}}</div>
+            <div style="display: block; height: 20px; background-color: rgb(129, 2, 2);" id="mem-gauge">{{mem_percent}}</div>
+        </div>
+        {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+    </div>
+    <script>
+        // console.log({{cpu_percent}})
+        let cpu = document.getElementById("cpu-gauge");
+        cpu.style.width = `${Math.ceil({{ cpu_percent }})}%`
+        let mem = document.getElementById("mem-gauge");
+        mem.style.width = `${Math.ceil({{ mem_percent }})}%`
+    </script>
+</body>
+
+</html>

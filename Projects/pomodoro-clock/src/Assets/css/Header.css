@@ -1,0 +1,14 @@
+.header-body{
+    height: 70px;
+    background-color: #000322;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-body h1{
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: initial;
+}

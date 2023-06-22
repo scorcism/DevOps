@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,500;1,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #424B65;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.container {
+    background-color: #0F1A29;
+    margin: 40px 13em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-body {
+    /* padding: 20px 10px; */
+    width: 100%;
+}
+.line{
+    width: 2px;
+    height: 100%;
+    color: white;
+}
+.timings-main{
+    display: flex;
+    align-items: center;
+    width: 102%;
+    background-color: #171D39;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+    border: 1.8px solid black;
+    position: relative;
+    left: -10px;
+    box-shadow: 1px 5px 6px 0px rgba(0,0,0,0.75);
+}
+.timings-main div {
+    padding: 12px;
+    cursor: pointer;
+}
+.container-clock{
+    background-color: #0F1A29;
+
+}
+.body-clock{
+    background-color: #171D39;
+    margin: 20px;
+}
+.body{
+    padding: 10px;
+    
+    border: 1.8px solid black;
+}
+.menu{
+    margin: 10px 25px;
+    background-color: #D9D9D9;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px 0px;
+}
+.clock, .short-time, .long-time{
+    font-size: 1.3em;
+    font-weight: 400;
+    border:2px solid #0F1A29;
+    padding: 8px 22px;
+    background-color: #0F1A29;
+    cursor: pointer;
+}
+#timer{
+    margin:10px;
+    /* padding: 20px; */
+    /* border: 2px solid white; */
+    display: flex;
+    width: 100%;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    font-size: 9em;
+}
+.start-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.start-button h4{
+    font-weight: 400;
+    padding: 10px;
+    border: 2px solid #000322;
+    background-color: #000322;
+    padding: 10px 35px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.clock-body{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.time-wrapper{
+    display: flex;
+    font-size: 0.23em;
+    flex-direction: column;
+    align-items: center;
+}
+.time{
+    display: flex;
+}

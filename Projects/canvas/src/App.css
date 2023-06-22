@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.head{
+  background-color:#dcdde1;
+  height: 50px;
+  width: 100vw;
+  border-bottom: 3px solid #483a8f;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 40px;
+  font-family: 'DynaPuff', cursive;
+  font-size: 25px;
+}
+
+.user_option{
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  width: 50%;
+  height: 100%;
+  font-family: 'Silkscreen', cursive;
+
+}
+
+.color_option{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  font-size: 13px;
+}
+.select{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  font-family: 'Silkscreen', cursive;
+  font-size: 13px;
+}
+.select a{
+  margin: 0px 20px;
+  border: 1px solid purple;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.color_option a{
+  margin: 0px 20px;
+  border: 1px solid purple;
+  padding: 3px 7px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+
+
+
+

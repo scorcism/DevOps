@@ -39,3 +39,82 @@
 - **Deployment**
 In this phase, we promote the application to production.
 </details>
+
+<details>
+  <summary>Multi stage docker builds</summary>
+
+  
+#### Multi stage docker builds
+- Split docker file into two parts or multiple parts
+![Simple multi stage eg](https://imgur.com/FTwOGgb.png)
+![Multi stage eg](https://imgur.com/IfqKkwc.png)
+
+<details>
+  <summary>eg</summary>
+
+ **file: Dockerfile**
+
+  **Without multistage**
+
+  ```
+    ###########################################
+    # BASE IMAGE
+    ###########################################
+
+    FROM ubuntu AS build
+
+    RUN apt-get update && apt-get install -y golang-go
+
+    ENV GO111MODULE=off
+
+    COPY . .
+
+    RUN CGO_ENABLED=0 go build -o /app .
+
+    ENTRYPOINT ["/app"]
+  ```
+
+  **With multistage**
+  ```
+  ###########################################
+  # BASE IMAGE
+  ###########################################
+
+  FROM ubuntu AS build
+
+  RUN apt-get update && apt-get install -y golang-go
+
+  ENV GO111MODULE=off
+
+  COPY . .
+
+  RUN CGO_ENABLED=0 go build -o /app .
+
+  ############################################
+  # HERE STARTS THE MAGIC OF MULTI STAGE BUILD
+  ############################################
+
+  FROM scratch
+
+  # Copy the compiled binary from the build stage
+  COPY --from=build /app /app
+
+  # Set the entrypoint for the container to run the binary
+  ENTRYPOINT ["/app"]
+  ```
+
+</details>
+</details>
+
+<details>
+
+<summary>Distroless images</summary>
+
+#### Distroless images
+
+- Basically a very minimilistic image, that will hardly have any packages and will only have the runtime envs.
+- eg python distroless images
+- Improves security 
+
+</details>
+

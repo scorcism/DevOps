@@ -165,7 +165,7 @@ _To tackle this docker came up with 2 concepts **bind mounts** and **volumes**_
     - `aws configure`
     - `aws s3 ls` -> list s3 buckets
     - `aws ec2 describe-instances` -> list ec2 
-    - https://gist.github.com/mda590/679aba60ca03699d5b12a32314debdc0
+    - https://gist.github.com/mda590/679aba60ca03699d5b12a32314debdc0 -> oython boto3
     - 
 
 

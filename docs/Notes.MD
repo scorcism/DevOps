@@ -143,11 +143,31 @@ _To tackle this docker came up with 2 concepts **bind mounts** and **volumes**_
 - using volume docker will be create a logical disk or it will create a logical volume and this volume will be mounted to the container. 
 - we can create volumes in any host, any external storage we can link it with the container volume.
 - eg
-    - **_docker volume ls_**
-    - **_docker volume create scor32k_** -> This will create a  logical partition on the host which we can't see
-    - **_docker volume inspect scor32k_** -> To inspect(details about the volume) a volume 
-    - **_docker volume rm scor32k_** -> delete volume scor32k 
-    - docker run -d --mout source=scor32k, target=/app image details 
+    - `docker volume ls`
+    - `docker volume create scor32k` -> This will create a  logical partition on the host which we can't see
+    - `docker volume inspect scor32k` -> To inspect(details about the volume) a volume 
+    - `docker volume rm scor32k` -> delete volume scor32k 
+    - `docker run -d --mout source=scor32k, target=/app image details `
     
+
+</details>
+
+<details>
+<summary>AWS CLI</summary>
+
+1) **Using cmd**
+    - `ssh -i path/to/private/key hostname@ipaddress`
+
+2) **aws cli**
+    - Install aws cli
+    - create aws access  key
+    - `aws version` -> check aws 
+    - `aws configure`
+    - `aws s3 ls` -> list s3 buckets
+    - `aws ec2 describe-instances` -> list ec2 
+    - https://gist.github.com/mda590/679aba60ca03699d5b12a32314debdc0
+    - 
+
+
 
 </details>

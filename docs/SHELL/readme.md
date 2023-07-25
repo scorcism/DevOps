@@ -46,4 +46,9 @@ aws iam list-users
 
 </details>
 
+<details>
+<summary>Project using Shell Scripting | GitHub API Integration Module</summary>
 
+- [Module code](https://github.com/devops-by-examples/Shell/blob/main/github-api-integration-module.sh)
+
+</details>

@@ -253,6 +253,140 @@
 
 
 <details>
+<summary>VPC</summary>
+
+## Virtual Private cloud 
+
+# VPC
+
+1) There is a person in the internet and he is trying to access an application which is called 172.16.3.x/xx _project a_
+2) There is a `DevOps enginner` who has created a `VPC`.
+3) There is basically a  `Internet gateway` as the front, which has a basic `Ip address range ` and inside that we have  `subnet` for suppose project a, project b and project c or n projects. So, the entire `ip` range is divided into `multiple subnets`
+4) What is `subnet`, for each project we have `divided` the `ip address range`. 
+5) Lets say there is 1 ec2 instance(project a) inside the subnet and the end goal is to reach here(the subnet) from the internet which is completly outside the VPC.
+
+6) **The Process**
+
+    a) The user will come to the `internet gateway`. It will pass through the internet gateway.
+
+    b) After it passes `Internet gateway` there is a `public subnet`
+
+    c) what is `public subnet`? 
+    public subnet+ is the one that can be accessed to the public `outside` the `VPC`. but, they have to `pass` through the `internet gateway`
+
+    d) Once they pass through the internet gateway, In the `public subnet` there is something called as `load balancer` in _aws_ it is called as `elastic load balancer (elb)`.
+
+    e) What is the usecase of  `elastic load balancer`? 
+    Your `request` from the external world has reach the elastic load balancer, from the elastic load balancer it has to goto ec2 instance (project a), but how will the load balaner will understand it has to goto project a  inside VPC ?
+
+    f) For elastic load balancer to send your `request` to the private subnet _project a _ there has to be a `proper route`. So, who will define this route from load balancer to the private subnet or project a.
+
+    g) There is something called has a `route table`. Now, you need to have a `route table` and using that partiular path your request from the load balancer to the private subnet has to go. 
+
+    h) Now what you will do is for a elastic load balancer, to the load balancer you will *attach* a `private subnet` and  the `target group`.
+
+    i) For the load balancer to understand request where to go, you need to create a target group and assign the instance _i.e_ ec2 project a to the target group, and at the same time `subnet` should have the `route table ` so that traffic can flow.  
+
+    j) At the instance _(project a)_ there is a `security group` which can `block` the request or `accept` the request. 
+
+    ![Diagram](https://imgur.com/tk3bSPJ.png)
+
+    k) Suppose you have multiple private subnet and they uses same `security group`, within a subnet if you want to define the same security group to `multiple applications`, multiple ec2 instances or you want to `repeat` the security group configuration, there is something called as  `NACL` 
+
+    - NACl are automation for the security group, where insted of  defining the same thing again and again you define that has a `part` for NACLs.
+
+    - *NAT gateways*
+    This help to download resources or connect to internet while helping you to mask the ip address.  
+
+    This is used to `mask` the IP address. It is not good pratice to expose private ip address, so `NAT` will try to mask the ip address. It will change the ip address which the public ip address either of the load balancer or the router.
+
+    If it is using the  use load balancer, we will it has a *SNAT* and if uses the router we call it has *NAT* 
+
+    _VPC Flow logs_ records every action.
+
+    <details>
+    <summary>Official</summary>
+
+
+    Imagine you want to set up a private, secure, and isolated area in the cloud where you can run your applications and store your data. This is where a VPC comes into play.
+
+    A VPC is a virtual network that you create in the cloud. It allows you to have your own private section of the internet, just like having your own network within a larger network. Within this VPC, you can create and manage various resources, such as servers, databases, and storage.
+
+    Think of it as having your own little "internet" within the bigger internet. This virtual network is completely isolated from other users' networks, so your data and applications are secure and protected.
+
+    Just like a physical network, a VPC has its own set of rules and configurations. You can define the IP address range for your VPC and create smaller subnetworks within it called subnets. These subnets help you organize your resources and control how they communicate with each other.
+
+    To connect your VPC to the internet or other networks, you can set up gateways or routers. These act as entry and exit points for traffic going in and out of your VPC. You can control the flow of traffic and set up security measures to protect your resources from unauthorized access.
+
+    With a VPC, you have control over your network environment. You can define access rules, set up firewalls, and configure security groups to regulate who can access your resources and how they can communicate.
+
+    ![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/12cc10b6-724c-42c9-b07b-d8a7ce124e24)
+
+    By default, when you create an AWS account, AWS will create a default VPC for you but this default VPC is just to get started with AWS. You should create VPCs for applications or projects. 
+
+    ## VPC components 
+
+    The following features help you configure a VPC to provide the connectivity that your applications need:
+
+    Virtual private clouds (VPC)
+
+        A VPC is a virtual network that closely resembles a traditional network that you'd operate in your own data center. After you create a VPC, you can add subnets.
+    Subnets
+
+        A subnet is a range of IP addresses in your VPC. A subnet must reside in a single Availability Zone. After you add subnets, you can deploy AWS resources in your VPC.
+    IP addressing
+
+        You can assign IP addresses, both IPv4 and IPv6, to your VPCs and subnets. You can also bring your public IPv4 and IPv6 GUA addresses to AWS and allocate them to resources in your VPC, such as EC2 instances, NAT gateways, and Network Load Balancers.
+
+    Network Access Control List (NACL)
+
+        A Network Access Control List is a stateless firewall that controls inbound and outbound traffic at the subnet level. It operates at the IP address level and can allow or deny traffic based on rules that you define. NACLs provide an additional layer of network security for your VPC.
+    
+    Security Group
+
+        A security group acts as a virtual firewall for instances (EC2 instances or other resources) within a VPC. It controls inbound and outbound traffic at the instance level. Security groups allow you to define rules that permit or restrict traffic based on protocols, ports, and IP addresses.  
+
+    Routing
+    
+        Use route tables to determine where network traffic from your subnet or gateway is directed.
+    Gateways and endpoints
+
+        A gateway connects your VPC to another network. For example, use an internet gateway to connect your VPC to the internet. Use a VPC endpoint to connect to AWS services privately, without the use of an internet gateway or NAT device.
+    Peering connections
+
+        Use a VPC peering connection to route traffic between the resources in two VPCs.
+    Traffic Mirroring
+
+        Copy network traffic from network interfaces and send it to security and monitoring appliances for deep packet inspection.
+    Transit gateways
+
+        Use a transit gateway, which acts as a central hub, to route traffic between your VPCs, VPN connections, and AWS Direct Connect connections.
+    VPC Flow Logs
+
+        A flow log captures information about the IP traffic going to and from network interfaces in your VPC.
+    VPN connections
+
+        Connect your VPCs to your on-premises networks using AWS Virtual Private Network (AWS VPN).
+
+
+    ## Resources 
+
+    VPC with servers in private subnets and NAT
+
+    https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
+
+    ![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/89d8316e-7b70-4821-a6bf-67d1dcc4d2fb)
+
+
+
+    </details>
+
+
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

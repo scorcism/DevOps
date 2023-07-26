@@ -435,6 +435,42 @@ Network Access Control Lists (NACLs):
 
 
 <details>
+<summary>Route53</summary>
+
+This provide `DNS` (Domain Name system) as a `service`.
+
+In VPC, we have a internet gateway and inside VPC we have pruvaet subnet and private subnets.
+
+In private subnet we have our applications.
+
+In public subnet we have load balancer, NAT gateway, etc.
+
+From load balancer request will goto appication in real time.
+
+When the load balancer is created, aws gives that load balancer a ip address.
+
+Suppose we have a user and the user tries to access the application through the load balancer. you cannot give the user the ip address of the load balancer. There are two reasons.
+
+1) names are easy to remember compare to ip address.
+2) IP address can anytime change.
+
+DNS keeps a lot of records. That map domain names to the ip address. 
+
+So, in front of the load balancer we will have a route 53 
+
+![Diagram](https://imgur.com/TIRyy77.png)
+
+To configure route 53, we need to do a lot of things
+
+1) Domain Registration itself.
+2) Hosted zones ->  here we create a dns records
+
+route 53 also provides health check of the web servers
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

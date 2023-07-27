@@ -469,6 +469,34 @@ route 53 also provides health check of the web servers
 
 </details>
 
+<details>
+<summary>Project Live - Project Used In Production</summary>
+
+**Auto scaling group**
+
+It is like a concept where suppose you want servers to handle the users request and you go with two servers and you know you can require 4-5 servers at some point of time, so insted of creating 4-5 servers ast one time,  What you can do is use auto scaling group. Suppose you have 100 users and which can be handled by two of these servers and suppose there is a boom in request and user hit count reaches to 200 so what auto scaling group will do is, it will `instanly` increase the cout of servers.
+
+**Load Balancer**
+
+It is something that `balances the load`. Distribute load among servers.
+
+**Bastion Host or Jump Server**
+
+Its not recommented to expose the (public ip addres) of the private subnet. What we can do is we can create a bastian host or just a jump host, in th public subnet and through that bastian or jump host, we will connect to the instances inside the private subnet.
+
+We will connect our private subnet instances with the help of bastion server which is inside the public subnet with the help off private ip address inside the VPC.
+
+Insted of directly connecting to the server, we can connect from he bastion, so there can be a proper logging machenism, proper auditing, can configure bunch of rules in the bastion host, where the traffic actully moves from the bastian host.
+
+
+** Blog [Link](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html) **
+
+_aws public private subnet architecture_
+![Architecture](https://docs.aws.amazon.com/images/vpc/latest/userguide/images/vpc-example-private-subnets.png)
+
+
+</details>
+
 
 <details>
 <summary></summary>

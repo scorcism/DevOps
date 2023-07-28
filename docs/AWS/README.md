@@ -843,6 +843,69 @@ aws s3 ls # list s3 bucktes
 
 
 <details>
+<summary>IaC with AWS CFT</summary>
+
+**CFT** -> **Cloud Formation Template**
+are used to create infrastructure on `aws`
+
+They implements the principle of IaC (Infrastructure as Code)
+
+It is a template that helps in cloud(aws) formation. So, cft are templates that helps us in cloud formation in aws i.e in creating the resources, managing  and updating the cloud insftarcture in aws.
+
+Why choose cft over cli ?
+
+CFT implements the principles of IaC which cli does not.
+
+Infrastructure as Code Principles
+
+1) any tool i.e iac tool, this tool as to act as a middle man between the user and one or multiple cloud provider, if users submits a template. eg terraform supports multiple cloud provider, cft supports only aws.
+
+    Any template i.e declarative and versioned in nature as to be submitted by the user to the tool, and the tool has to take template as input and convert this to the lanaguge that the cloud provider understands, usually tha langauge are api call.
+
+    user can submit YAML or JSON file both supported by CFT
+
+
+Features of CFT and format
+
+1) Supports both JSON and (YAML)
+2) has many Features such as creating IaC and Drift Detection
+
+Drift Detection ?
+
+detect changes made to the resources created by cloud formation which are not rquired. 
+
+Stacks ?
+
+Stack is the one that implements the template. 
+
+When you write a template you have to submit it to stack, and stack will convert the template request into the api using the cloud formation service. 
+
+CFT YAML file structure components
+
+- version 
+- description
+- metadata
+- parameters -> passing variable to CFT at runtime 
+- rules -> let say you want to validate the parameter submiited by the parameters. (check naming convention)
+- mappings -> assigning the parameter to the variables
+- conditions
+- resources -> manditory, here, we define what exactly we want.
+- output -> 
+
+**[Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)**
+
+**[Template Format](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-formats.html)**
+
+**[Template anomity](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)**
+
+**[Template Reference -> Resource and property reference ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)**
+
+Tools VS Code-> YAML && AWS toolkit 
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

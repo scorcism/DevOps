@@ -1,5 +1,45 @@
 # **AWS Services**
 
+
+<details>
+<summary>Services --oneline</summary>
+
+1) EC2 -> Live Projects
+
+2) VPC -> to `secure` ec2 instances
+
+3) EBS Volumes -> add `volume` to ec2 instances
+
+4) S3 -> `storage service`
+
+5) IAM -> Identity and Access Management, for `authentication and authorization`.
+
+6) Cloud Watch -> takes care of `monitoring` and `oberservibility` in aws
+
+7) Lambda -> `serverless compute` 
+
+8) Cloud Build services -> aws `CI/CD` using these 3 services
+
+    - AWS Code Pipeline -> Like jenkins pipeline
+    - AWS Code Build -> Fully managed build service 
+    - AWS Code Deploy -> Deploying your code
+
+9) AWS configurations services
+
+10) Billing and costing
+
+11) AWS KMS -> Key management service
+
+12) Cloud Trail -> Enable `operational` and  `risk auditing`. `Record api activities` and `preserve logs` for specific durations.
+
+13) AWS EKS -> Elastic Kubernetes service. 
+
+14) Fargate, ECS 
+
+15) ELK -> Elastic Search (logging search mechenism)
+
+</details>
+
 ## **Servics**
 
 ------

@@ -825,6 +825,24 @@ If an object is accidentally deleted, you can often recover it using versioning 
 
 
 <details>
+<summary>AWS cli</summary>
+
+[commands](https://docs.aws.amazon.com/cli/latest/)
+
+```bash
+aws version
+aws configure
+
+aws s3 ls # list s3 bucktes
+
+... etc
+
+```
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

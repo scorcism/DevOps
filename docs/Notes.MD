@@ -172,3 +172,208 @@ _To tackle this docker came up with 2 concepts **bind mounts** and **volumes**_
 
 </details>
 
+<details>
+<summary>Configuration Management</summary>
+
+What is Configuration Management ?
+
+it is the way how the devops enginners manages the configurations of the server or infrastructure.
+
+**Puppet vs Anisble**
+
+Puppet is a pull mechanism model. 
+
+Pupet uses master slave arch.. 
+
+In Pupet agent configuration is needed.
+
+Anisble is a `push`(developer writes the ansible scripts  in one place, and push the configuratons to 10 ec2 instnces.so just he has to execute the anisble playbook and the configuration is updated in the push mechenism  ) mechanism model. 
+
+Ansible uses `agent less model`. You can just put the names of ther server in a file called as `inventory file`(stores ip address of target servers), and just have the passwordless authentication enabled.
+
+Anisble is `preety simple`. Ansible uses YAML as configuration language.
+
+You can write your own anible module as anible is written in python.
+
+Anisble not good with windows, debugging and performance.
+
+Ansible as `anisble galaxy` where users can share module. 
+
+
+**Ansible**
+
+<details>
+
+<summary>Interview Questions</summary>
+
+[Questions](https://www.youtube.com/watch?v=j5PgN0J3d7M)
+
+1) What is Configuration Management
+> Configuration Management is a method or process of managing your software, syste m or hardware. To manage multiple servers with single tool.
+
+2) Do you think ansible is better> If yes, why ?
+> Ansible is agentless. It is packed by vast community. Is uses simple protocols such as ssh and winrm. It uses YML for writing the file.
+
+3) Can you write an ansible playbook to install and https service and get it running ?
+> Yes
+
+4) How ansible helped your organization?
+> say one practical example. 
+
+5) What is Ansible Dynamic Inventory ?
+> Ansible keeps looking at your aws account for newly added virtual machines and ansible will auto-configure those vertual machines using the concept of Dynamic Inventory. 
+
+6) What is Ansible Tower and have you use it ? if yes, why ?
+> Ansible Tower is premium version of ansible.
+
+7) How do you manage the RBAC of users for Ansible Tower ? 
+> RBAC -> Role Based Ansible Control. Manage groups in ansible tower. Managing access to ansible tower.
+
+8) What is Ansible Galaxy command and why it is used for ?
+> Ansible Galaxy creates bunch of folders using this files and folders you can structure your ansible playbooks
+
+9) Can you explain me structure of Ansible playbook using roles?
+> ansible has a standard structure. we can use ansible-galaxy command to create the structure. 
+
+> Role -> 
+
+10) What are handlers in Ansible and why are they used ?
+> They are similar to normal task in ansible. They only run when a task contains a notify directive. Conditional task. This tasks only run after some notifications.
+
+11) I would like to run a specific set of tasks only on windows vms and not Linux vms is it possible ?
+> you can use tags. you can also find the environment variable and you can use conditional bases running of task.
+
+12) Does ansible support parallel execution of tasks ?
+> ansible does parallel execution, if there ar 5 tasks it executes task 1 on all the configured servers then it runs task by task in serial way.
+
+13) What protocol does ansible use to connect to windows vms ?
+> `winrm` to connect to windows and `ssh` for linux
+
+14) Can you place them in the order od precedence ?
+> playbook group_vars, role vars and extra vars
+
+15) How do you handle secrets in Ansible ?
+> you can configure vault.  
+
+
+16) Can we use ansible for IaC ? If yes, can you compare it with any other IaC toos like Terraform ?
+> Yes, ansible is configuration management tool it might some of the things like creating ec2 instance or something like that but it is used for configuration management
+
+17) Can you talk about a ansible playbook that you write and how it helped your company ?
+> Explain your thoughts
+
+18) What do you think that ansible can improve ?
+> In debugging, windows support can be improved, can support more ides, develop more plugins.
+
+
+</details>
+
+Ansible files are call as `playbooks`
+
+singline line commands ~~ ls is called `adhoc commands`
+
+
+
+<details>
+<summary>Commands</summary>
+
+[MODULES LINKS](https://docs.ansible.com/ansible/2.9/modules/)
+
+```bash
+vim inventory
+
+x.x.x.x
+
+```
+
+_GROUPING_
+
+```bash
+vim inventory
+[dbserver]
+x.x.x.x
+x.x.x.x
+
+[webservers]
+x.x.x.x
+x.x.x.x
+
+```
+
+_COMMANDS_
+
+```bash
+
+ansible --version
+
+ansible -i[location of inventory file] inventory all -m[module] "shell" -a[command to execute] "touch devopsclass" # Adhoc command
+
+# group bases
+ansible -i inventory webservers -m[module] "shell" -a[command to execute] "touch devopsclass" # Adhoc command
+
+```
+
+**Ansible playbook**
+
+```bash
+
+vim first-playbook.yml
+
+--- 
+- name: Install and Start nginx #name of the playbook
+  hosts: all # on which server to execute
+  become: root # Ececute this playbook as a root user
+
+  tasks:
+    - name: Install nginx # Task name
+      apt:
+        name: nginx
+        state: present
+      # ~~ shell: apt install nginx 
+
+    - name: Start nginx
+      # shell: systemctl start nginx
+      service:
+        name: nginx
+        start: started  
+
+ansible-playbook -vvv -i inventory first-playbook.yml
+
+```
+
+ansible -> to run ansible adhoc commands
+
+ansible-playbook -> to run ansible playbbo
+
+ansible roles -> efficient way of writing ansible playbooks that will improve effencency to write complex playbook.
+
+```bash
+# configure kubernetes
+
+mkdir second-playbook
+cd second-playbook
+
+ansible-galaxy role init kubernetes
+
+# Using this ansible creates bunch of folder using this files and folders you can structure your ansible playbooks
+
+# meta -> write metatdata
+# defaults -> store varibles
+# tasks -> 
+# vars 
+# test
+# handlers -> handling some kind of exceptions
+
+
+```
+
+
+</details>
+</details>
+
+
+
+
+<details>
+<summary></summary>
+</details>

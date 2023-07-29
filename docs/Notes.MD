@@ -1,4 +1,4 @@
-# Notes
+# DevOps Concepts Notes
 
 <details>
   <summary>SDLC - software development life cycle</summary>

@@ -367,12 +367,27 @@ ansible-galaxy role init kubernetes
 
 ```
 
-
 </details>
 </details>
 
+<details>
+<summary>Infrastructure as Code</summary>
 
+**Problem ?**
 
+IaC is a concept using which we can automate our infrasturcture.
+
+**API as code ?**
+
+api as code is a concept using which you can automate any provider weather its aws, azure anything using their apis. 
+
+**Terraform**
+
+Teraaform is a concept which is used to sove all of these problems, also works on the same concept of IaC, but terraform as advance capabilities called API as Code.
+
+where insted of you writing all of these, terraform says that just learn one language i.e terraform that will take care of talking to all of those cloud providers using the concept of API as Code.
+
+</details>
 
 <details>
 <summary></summary>

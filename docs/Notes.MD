@@ -390,5 +390,137 @@ where insted of you writing all of these, terraform says that just learn one lan
 </details>
 
 <details>
+<summary>Terraform</summary>
+
+What tf basically does is, you configure  tf provider and tf will talk to the target api.
+
+target api ?
+
+> suppose, you have set tf provider as aws so what tf will understand is, what ever the user has writeen(configuration files) , tf will convert this config files into that api that aws will understand.
+
+- Templating language is the same.
+
+- Track Infrastructure
+
+- Automate changes
+
+- Collaborate
+
+- Standardize Configurations -> standardizing the way of writing.
+
+### tf lifecycle
+
+- Write config file -> Define infrastructure in configuration files
+
+- Plan -> Review the changes `support dry run`
+
+- Apply
+
+- Destroy
+
+
+**commands**
+ 
+requirement aws cli
+
+ ```bash
+ 
+ terraform init # Initilize 
+ # will initilize the tf 
+
+ terraform plan # Dry run
+
+ terraform apply # 
+
+ terraform destroy # 
+
+
+
+```
+
+**starter file**
+
+```terraform
+
+# create ec2 instance
+
+vim main.ts
+
+
+# tf blocks
+terraform {
+
+  # Provider details
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+
+  # required version of tf cli
+  required_version = ">= 1.2.0"
+}
+
+# option - region
+provider "aws" {
+  region  = "us-west-2"
+}
+
+# resources that we want
+resource "aws_instance" "app_server" {
+  ami           = "ami-830c94e3"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Terraform_Demo"
+  }
+}
+
+
+```
+
+#### using the state file tf will track all the changes `*.tfstate`
+
+tf uses state file to track everything that it has created
+
+you should `store` your state file `remotely`.
+
+not on you `local` machine
+
+its not good idea to store the state file in  `source control`
+
+store state file in remote storage services
+
+Isolate and organize the state files to reduce the blast radius 
+
+Ideal tf structure
+![tf](https://imgur.com/rL1oLMA.png)
+
+[repo todo](https://github.com/iam-veeramalla/write_your_first_terraform_project/)
+
+
+#### Modules
+
+- existing modules
+
+- write your own modules
+
+#### Problems
+
+1) state file is single source of truth
+
+2) manual changes to the cloud provider cannot be identified and auto-coorected.
+
+3) Not a GitOps frendly tool. Don't play well with flux or argo
+
+4) can become very complex and difficult to manage.
+
+5) Trying to position as a configuration management tool as well.
+
+
+</details>
+
+<details>
 <summary></summary>
 </details>

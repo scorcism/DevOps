@@ -522,5 +522,58 @@ Ideal tf structure
 </details>
 
 <details>
+<summary>CI/CD</summary>
+
+What is CI/CD?
+
+It is basically two steps.
+
+1) Continuous Interation: It is a process where you integrate a set of tools or processes that you follow before delivering your project to the customer.
+
+2) Continuous Delivery: where you deploy your applications,
+
+eg
+
+the process and steps of testing, monitoring, and all that are to be automated under this.
+
+Some of the steps before delivering the product to the end user
+
+1) unit test -> testing code block, function wise
+2) static code analysis: avoid memory leaks and waste of memory. syntax check, well formatted, indentation
+3) Code quality and vulnerability testing
+4) Automation testing (end-to-end testing) > functional testing Check if one change does not affect others. Verify in an end-to-end manner.
+5) Reporting ->
+6) Deploy
+
+These steps all take a lot of time.
+
+We need a vcs (version control system) (Github, Gitbucket, and GitLab) to maintain the versioning of the code.
+
+When the moderator pushes the code to VCS from there, your cicd will take care.
+
+1)
+
+![v1](https://imgur.com/WY8umpU.png)
+
+
+When the programmer commits the code to, say, github, we will setup a CICD tool, e.g., Jenkins, in our organisation, and what we will tell Jenkins is to always watch the repo, and when ever there is a merge request, push request, or new commit on a specific branch, just tell me, and what Jenkins will do is, after listing the event, run a set of actions.
+and after that, Jenkins will run all that as part of testing.
+
+Jenkis will act as an orchentrator, a pipeline, As part of these pipelines, Jenkins will automate and orchestrate a lot of tools.
+
+Jenkins is called the orchestrator, which will facilitate all of the tools using the Jenkins pipeline.
+
+
+2) 
+
+![v2](https://imgur.com/sbSS1W8.png)
+
+jenkins can also promote the applications to different stages.
+
+
+
+</details>
+
+<details>
 <summary></summary>
 </details>

@@ -906,6 +906,62 @@ Tools VS Code-> YAML && AWS toolkit
 
 
 <details>
+<summary>AWS CodeCommit</summary>
+
+In Ideal case using jenkins we have 4 steps
+
+    1) we need a place, where we host or code eg github and github using webhooks trigenners the jenkins pipeling
+
+    2) jenkins pipeline
+    
+    3) within pipeline, we have build process
+
+    4) Deploy to k8s ot ec2
+
+so for this 4 steps we are using 4 tools
+
+    1) github
+
+    2) jenkins
+
+    3) Docker
+
+    4) shell, argocs, ansible to deploy
+    
+so AWS came up with its own services to implete this all things 
+
+For version control use **CodeCommit** ~ GitHub
+
+For Jenkins Pipeline use **CodePipeline**
+
+For building use **AWS CodeBuild**
+
+For deploy use **AWS CodeDeploy**
+
+## AWS CodeCommit
+
+Store code in **Private Git Repos**
+
+```bash
+```
+
+**Advantages**
+
+- Managed Git
+- Scalability
+- Reliability
+
+**Dis-advantages**
+
+- Features
+- AWS Restricted
+- Less Integration with services outside AWS
+
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

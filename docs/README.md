@@ -974,8 +974,50 @@ Q: What are some of the common plugins that you use in Jenkins ?
 A: Be prepared for answer, you need to have atleast 3-4 on top of your head, so that interview feels you use jenkins on a day-to-day basis.
 
 
+</details>
+
+<details>
+<summary>Project Management Tools</summary>
+
+
+**Agile**
+
+The Agile methodology is a project management approach that involves breaking the project into phases and emphasizes continuous collaboration and improvement. Teams follow a cycle of planning, executing, and evaluating.
+
+![img](https://www.nvisia.com/hubfs/agile-methodology-chicago.png)
+
+
+**JIRA**
+
+Platform that implements agile or project management.
+
+Used to track projects.
+
+**Confluence** && **SharePoint**
+
+A knowledge sharing platform.
+
+Just like, jira every project can create their own pages, or projects inside confluence and they can start working it.
+
+Documentation sharing platform.
+
+**servicenow**
+
+monitoring system can be easily integrated with the service now apis. where your monitoring system directly talks to the servicenow api and it creates the incidents on its own and it assigns the tickets.
+
+Incident Management -> Tracking incidents 
+
+Change Management -> ***
+
+
+**Read the Docs**
+
+open source version of Confluence && SharePoint.
+
+Good Integration with Github
 
 </details>
+
 
 <details>
 <summary></summary>

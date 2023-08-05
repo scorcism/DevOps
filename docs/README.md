@@ -906,6 +906,43 @@ Good Integration with Github
 
 </details>
 
+
+<details>
+<summary> Containers </summary>
+
+Advancement to virtual machines.
+
+Containers are light weight in nature as they do not have **a complete OS** 
+
+have a minimal OS or a base image .
+
+A container is a package or a bundle which is the combination of application + application libraries  + system dependencies.
+
+and rest other will be used from the host machine.
+
+**Whay docker is popular ?**
+
+to create a conatiner what docker has done is, just simple write a docker file, and you cans ubmit this to docker engine using some docker command and this docker engine will convert this dockerfile into and image and again using some docker command you can convert this docker image into docker comtainer. 
+
+Docker Lifecyele
+
+1. Write a dockerfile
+2. Execute a dockerfile, and create a image
+3. Execute the image and create a container.
+
+Docker is dependent on docker engine which is a single point of faiure (spof) means when the docker engine is down all the docker container will be down too.
+
+so, to avoid this spof, creating lot of layers, and other challenges [Buildah](https://buildah.io/) can workaround with this.
+
+
+</details>
+
+
+
+
+
+
+
 <details>
   <summary>Multi stage docker builds</summary>
 

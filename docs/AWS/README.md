@@ -962,6 +962,29 @@ Store code in **Private Git Repos**
 
 
 <details>
+<summary> AWS Code Pipeline </summary>
+
+~ **Jenkins**, which is responsibe for continous integration which implements continous interation and invoking continous delivery
+
+CI/CD Flow using jenkins
+
+![Flow chart](https://imgur.com/nBgg5x0.png)
+
+using code pipeline 
+
+code pipeline invokes continuous integratiom and invokes continuous dilivery
+
+![code pipeline](https://imgur.com/u65npyx.png)
+
+**Why Pipeline ?**
+
+- Auto Managing
+- Auto Scalling 
+
+</details>
+ 
+
+<details>
 <summary></summary>
 </details>
 

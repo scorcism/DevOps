@@ -571,9 +571,124 @@ Jenkins is called the orchestrator, which will facilitate all of the tools using
 jenkins can also promote the applications to different stages.
 
 
+</details>
+
+
+<details>
+<summary>Jenkins</summary>
+
+### Install
+
+Pre-Requisites:
+
+- Java (JDK)
+
+**Run the below commands to install Java and Jenkins**
+
+Install Java
+
+```bash
+
+sudo apt update
+sudo apt install openjdk-11-jre
+
+```
+
+Now, you can proceed with installing Jenkins
+
+```bash
+
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+```
+
+allow inbound rules
+
+### Docker Slave Configuration
+
+Run the below command to Install Docker
+
+```
+sudo apt update
+sudo apt install docker.io
+```
+
+#### Grant Jenkins user and Ubuntu user permission to docker deamon.
+
+
+```bash
+sudo su - 
+usermod -aG docker jenkins
+usermod -aG docker ubuntu
+systemctl restart docker
+```
+
+Once you are done with the above steps, it is better to restart Jenkins.
+
+```bash
+http://<ec2-instance-public-ip>:8080/restart
+```
+
+The docker agent configuration is now successful.
+
+## Install the Docker Pipeline plugin in Jenkins:
+
+   - Log in to Jenkins.
+   - Go to Manage Jenkins > Manage Plugins.
+   - In the Available tab, search for "Docker Pipeline".
+   - Select the plugin and click the Install button.
+   - Restart Jenkins after the plugin is installed.
+   
+<img width="1392" alt="Screenshot 2023-02-01 at 12 17 02 PM" src="https://user-images.githubusercontent.com/43399466/215973898-7c366525-15db-4876-bd71-49522ecb267d.png">
+
+Wait for the Jenkins to be restarted.
+
+
+### Jenkinsfile
+
+using the pipeline one which uses groove syntax and you can easily generate the goovy code using jenkins groovi generator 
+
+simple jenkins file
+
+```groovy
+pipeline {
+  agent {
+    docker { image 'node:16-alpine' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
+    }
+  }
+}
+
+```
+
+#### Jenkins interview 
+
+1) CICD Process
+
+[Doc](https://www.jenkins.io/doc/book/pipeline/)
+
+![Pipeline ](https://www.jenkins.io/doc/book/resources/pipeline/realworld-pipeline-flow.png)
+
+2) How do you handle issues in the worker node
+
+    login to the worker node try to undertsand the problem, look into health, but this would not happen if we use docker.
 
 </details>
+
 
 <details>
 <summary></summary>
 </details>
+
+

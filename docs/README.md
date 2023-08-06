@@ -1296,8 +1296,6 @@ c5ff2d88f679: Mounted from library/ubuntu
 latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb8221b1d88 size: 1157
 ```
 
-### You must be feeling like a champ already 
-
 </details>
 
 
@@ -1308,64 +1306,89 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
 
 #### Multi stage docker builds
 - Split docker file into two parts or multiple parts
+
+Suppose you are writing a calculator and you are using ubuntu as a base images so for python we only need python interepeter
+
 ![Simple multi stage eg](https://imgur.com/FTwOGgb.png)
 ![Multi stage eg](https://imgur.com/IfqKkwc.png)
 
-    <details>
-      <summary>eg</summary>
 
-    **file: Dockerfile**
+### Without multistage
 
-      **Without multistage**
+**file: Dockerfile**
 
-      ```
-        ###########################################
-        # BASE IMAGE
-        ###########################################
+```Dockerfile
+###########################################
+# BASE IMAGE
+###########################################
 
-        FROM ubuntu AS build
+FROM ubuntu AS build
 
-        RUN apt-get update && apt-get install -y golang-go
+RUN apt-get update && apt-get install -y golang-go
 
-        ENV GO111MODULE=off
+ENV GO111MODULE=off
 
-        COPY . .
+COPY . .
 
-        RUN CGO_ENABLED=0 go build -o /app .
+RUN CGO_ENABLED=0 go build -o /app .
 
-        ENTRYPOINT ["/app"]
-      ```
+ENTRYPOINT ["/app"]
+```
 
-      **With multistage**
-      ```
-      ###########################################
-      # BASE IMAGE
-      ###########################################
+### With multistage
 
-      FROM ubuntu AS build
+```Dockerfile
+###########################################
+# BASE IMAGE
+###########################################
 
-      RUN apt-get update && apt-get install -y golang-go
+FROM ubuntu AS build
 
-      ENV GO111MODULE=off
+RUN apt-get update && apt-get install -y golang-go
 
-      COPY . .
+ENV GO111MODULE=off
 
-      RUN CGO_ENABLED=0 go build -o /app .
+COPY . .
 
-      ############################################
-      # HERE STARTS THE MAGIC OF MULTI STAGE BUILD
-      ############################################
+RUN CGO_ENABLED=0 go build -o /app .
 
-      FROM scratch
+############################################
+# HERE STARTS THE MAGIC OF MULTI STAGE BUILD
+############################################
 
-      # Copy the compiled binary from the build stage
-      COPY --from=build /app /app
+FROM scratch
 
-      # Set the entrypoint for the container to run the binary
-      ENTRYPOINT ["/app"]
-      ```
+# Copy the compiled binary from the build stage
+COPY --from=build /app /app
 
-    </details>
+# Set the entrypoint for the container to run the binary
+ENTRYPOINT ["/app"]
+```
+
+#### React Project
+
+```Dockerfile
+
+# build environment
+FROM node:12.2.0-alpine as build
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json /app/package.json
+RUN npm install --silent
+RUN npm config set unsafe-perm true #https://stackoverflow.com/questions/52196518/could-not-get-uid-gid-when-building-node-docker
+RUN npm install react-scripts@3.0.1 -g --silent
+COPY . /app
+RUN npm run build
+
+# production environment
+FROM nginx:1.16.0-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+```
+
 </details>
 
 <details>
@@ -1376,6 +1399,7 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
 
 - Basically a very minimilistic image, that will hardly have any packages and will only have the runtime envs.
 - eg python distroless images
+- Reduces images size
 - Improves security 
 
 </details>
@@ -1383,7 +1407,7 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
 <details>
 <summary> Docker Volumes and Bind Mounts</summary>
 
-####  Docker Volumes and Bind Mounts
+###  Docker Volumes and Bind Mounts
 
 #### Why need volumes
 1) container did not have any way to read host file and to perfrom writee operations. Cannot keep track of previous logs, if the container fails.

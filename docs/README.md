@@ -1440,6 +1440,75 @@ _To tackle this docker came up with 2 concepts **bind mounts** and **volumes**_
 
 
 <details>
+<summary>Docker Networking</summary>
+
+Networking allows containers to communiate with each other, and the host system.
+
+If we take an example, we have 2 docker container on the host system suppose `backend` and `frontend` and will have to contact with each other and they need to surely interact with the host system.
+
+#### How a container can talk to the host OS?
+
+1) Container 1 talks to container 2
+2) Conatiner 1 has isolation with container 2
+
+Whenever you create a continer, docker creates a virtual **veth** (docker0). without this docker cannot talk to the host. This is called as **Bridge Networking** which is **default** in docker.
+
+![Bridge networking](https://imgur.com/VtNOwO3.png)
+
+1) Bridge Networking as explained above
+  
+2) Host Networking -> Containers will directly use the network of the host.
+
+Here, when you create a continer, docker will directly bind the your container with the ip address(eth0) of the host.
+
+Both of them are in the same cidr block
+
+This is very problametic in nature.
+
+3) Overlay network -> This is very usefull when you have multiple hosts. 
+
+The problem
+
+When we have 2 docker conatiners with the host which are connected using the bridge network, they will have to share the `docker0 brudge`, which becomres the common path between both the container and host. This is out of the box nature which is not secure. 
+
+How to achieve logical level isolation ?
+
+This can be achieved using the `bridge` networking itself.
+
+Docker allows you to **create custom bridge networks**.
+
+So, in our scenerio 1 container can talk to host with the veth or docker0 and otther container will talk using the custom bridge network.
+
+![Custom bridge network](https://imgur.com/tjv1osR.png)
+
+
+
+#### DEMO
+
+```bash
+
+docker inspect container_name # Inspect continer
+
+docker network ls 
+
+docker network create new_name # new bridge netwok witll be created
+
+docker run -d --network=new_name --name secure image_name
+
+# However, you can at any point of time, attach the first container to my_bridge network and enable communication
+docker network connect my_bridge web
+
+# Container with the host network
+docker run -d --name demo-host --network=host image
+
+docker network rm test
+
+```
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
 

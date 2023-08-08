@@ -1703,6 +1703,106 @@ using the feature of auto-healing, when ever the container is going down, even b
 
 
 <details>
+<summary>K8s Architecture</summary>
+
+Why k8s -> k 8 characters in mid then s
+
+Docker vs Kubernetes
+
+Kubernetes offer 4 fundamental advantages over docker
+
+1. by-default cluster in nature
+2. Auto healing
+3. Auto scaling
+4. multiple enterpirse level support
+
+in Docker the simpleset thing is `container` and in k8s the simplest thing is `pod`.
+
+To run container we must have a **container runtime** called as **dockershim**.
+
+In k8s we create a **Master** and a **worker**.
+
+So, what happens, in k8s we dont directly send the request to the worker but your requests **goes through master**. Your request always goes through something called as **control plane**.
+
+In k8s the smallest level of deployment is **pod**. In Docker we deploy a **container**.
+
+Pod is just a wrapper over a container which has some advance capilities.
+
+When user tries to deploy a pod, similar to container, your pod get deployed, we have component in pods called has `**kubelet**` which is **responsoble for running** the pod. 
+
+In docker we have a docker engine- dokershim in **K8s** we have `kubelet`, which is **reponsible** for **maintaing** this kubernetes pod. It always looks for, if the pod is running or not running using the feature of auto healing it maintaing the  env.
+
+But we need a container runtime to run the containers, so in k8s we have a **container runtime**. The diff is docker is **not** mendatory, in docker we have dockershim but, in k8s we can either use dockershim, containerd, crio these are all compitation to dockershim or anyother container runtime, which implements k8s container interface.  
+
+In docker we have docter0 or we have a default networking in docker i.e bridge networking so in k8s we have `**kube-proxy**` which provides you networking. 
+
+so, till now we talked about 3 
+
+These are the 3 components available in worker node or Data plane.
+
+1. **kube-proxy** -> which provides networking, ip addresses, and also the load balancing. Its uses [ip tables](https://medium.com/skilluped/what-is-iptables-and-how-to-use-it-781818422e52) on the linux machines.
+2. **kubelet** -> actually responsible for **creation** of the _pod_ and also responsible for **running** the application. If application is not running, then kubelet informs one of the components in the control plane that something is going wrong
+3. container runtime -> which actually runs your container
+
+#### Master component or control plane
+
+why you need control plane or master componenet or master node ?
+
+so for any application/components there are some standards, cluster is one specific standard. 
+
+Now, who will decide, where the pod will be created, in node 1 or node 2 or etc. So, this is one specific instuction, there can be multiple instcrutions and there should be a core component which has to deal with such type of instuctions. Components which act as a core components, take all the requests. 
+
+There has to be a core component which is bascially doing everything in the k8s and that core component is called as **`API server`** and this component is present in your master component. 
+
+**API server** is a component that basically exposes your k8s to the external world. The **hertz** of the k8s is API server
+
+now, suppose user is trying to create a pod, he tries to access the api server and from the api server k8s api server decides that node 1 is free but, to schedule the component in node 1 we have a component called as **`scheduler`** 
+
+**scheduler** -> so scheduler is basically responsibe for  scheduling your pod or scheduling your resources on k8s.
+
+API server decides the information and controller acts on that server.
+
+Now as we have deployed, we need a component that should act as a backup service, act as a backing store for the entire cluster information. In k8s we have `**etcd**`. 
+
+**etcd** -> A key value store and the entire cluster information is stored as objects in etcd. Without etcd we dont have the cluster related information. 
+
+**Controller Manager** 
+
+k8s supports auto scaling, so to support auto scalling k8s has some components, so mange those componnets in k8s we have **controllers** eg **replica set** used for mainting state of the pods. 
+
+Those controllers are managed by **controller manager**.
+
+**Cloud Controller Manager  c-c-m** 
+
+To help understand the cloud providers the user requests such as eks. 
+
+The k8s should understand the arch of eks so k8s has to translate the request from the user to the api request that yout cloud privider undertsands.
+
+This mechenism has to be implemented ccm.
+
+#### summary - Components of k8s
+
+![Components of k8s](https://imgur.com/i0qrMZy.png)
+
+we have k8s divided into 2 parts.
+
+control plane(master node) and data plane(worker node) 
+
+Data plane -> executing the actions.
+  1. kube-proxy
+  2. container runtime
+  3. kubelet
+
+Control plane -> controlling the actions.
+  1. API server
+  2. etcd
+  3. schedular
+  4. controller manager
+  5. ccm
+
+</details>
+
+<details>
 <summary>...</summary>
 
 .  .  .

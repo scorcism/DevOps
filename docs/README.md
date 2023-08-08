@@ -1662,10 +1662,51 @@ They are very small and light-weight images.
 
 </details>
 
+<details>
+<summary>KUBERNETES - k8s</summary>
+
+What is the diff between docker and kubernetes
+
+Docker is a **container platform**.
+
+Kubernets is a **container orchestration platform**. 
+
+Container are **Ephermeral** (short living in nature)(can die and revive anytime) in nature.
+
+Problem with docker or containers
+
+1. **Single host**. Nature of the container platform is scoped to single host. 
+
+2. Suppose someone killed one of your container,so application running inside the container will be not accessible. unless another developer or user starts the container it will not start. This behavour is called as **auto healing** 
+
+**Auto healing** -> is a behavour, where without users manual intervention your continer should start by itself. 
+
+3. **Auto Scaling**  -> as soon as the load get increased, *manually* you increase the container count from 1 to 10. or it has to happen automatically.
+
+4. Docker is very minimilistic and simple platform, docker doent support any enterprise level support. Enterprise standards such has having load balancer, firewall, auto scale, healing, api gateways, etc. 
+
+How Kubernetes solves the problem
+
+1. **Single Host** -> By default, kubernetes is a **cluster (Group of nodes)**. K8s are installed in a master node architecture. means, when ever we install  kubernetes we just create one master node and and multiple nodes. If there is one faulty application in the node and which is impacting the other applications, k8s because it has multi node arch immediatly it can put that application/pods in different node. 
+   
+2. **Auto Scaling** -> k8c has replica sets. Suppose we have increase in traffic we have someting called as `replication.yml` file, and say that increase my replacas from 1 to 10. 
+
+k8s also has **HPA**(Horizontal pod autoscalar) using which you can say when ever there is a load just keep increasing. 
+   
+3. **Auto healing** -> When ever there is a damage, k8s has to control the damage. k8s controls and fix the damage. 
+
+using the feature of auto-healing, when ever the container is going down, even before the container goes down, k8s will start a new container.
+   
+1. **Enterprise nature**
+
+</details>
 
 
 <details>
-<summary></summary>
+<summary>...</summary>
+
+.  .  .
+
 </details>
 
 

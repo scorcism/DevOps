@@ -1803,6 +1803,44 @@ Control plane -> controlling the actions.
 </details>
 
 <details>
+<summary>k8s Production systems</summary>
+
+k8s distros ?
+
+1. Kubernetes
+2. openshift
+3. Ranchter
+4. Tanzo
+5. EKS
+6. AKS
+7. GKE
+8. DKE
+
+Diff between k8s and EKS
+
+EKS provide supports and if you use k8s you have to manage on your owns.
+
+How devops enginner manages 100 of clusters on production ?
+
+Using tools such has kops, kubeadm. **kops** is the toll which is most widely used.
+
+**KOPS** Kubernetes Operations.
+
+The life cycle of k8s is managed by kops. This is the most widly used tool for installing k8s.
+
+
+#### To learn k8s and explore for development envs
+
+1. minikube
+2. k3s
+3. kind
+4. k3d
+4. microk8s
+
+
+</details>
+
+<details>
 <summary>...</summary>
 
 .  .  .

@@ -1841,9 +1841,115 @@ The life cycle of k8s is managed by kops. This is the most widly used tool for i
 </details>
 
 <details>
-<summary>...</summary>
+<summary>Deploy application on k8s</summary>
 
-.  .  .
+k8s features
+
+1. k8s is a cluster
+2. auto scaling
+3. auto healingenterprise level behavour
+
+In k8s the lowest level of deployment is **pod**. In Docker we used to create a container and we deploy that container in k8s we directly cannot deploy the container, in k8s we will use these containers but as a pod.
+
+### What is pod? why we shuld deploy our container as a pod?
+
+A pod is described as a defination of how to run a container. In docker if we want to run a continer we say, `docker run -d -it image -p x:x -v x:x`. In docker we were passing all of these arguments to run the container in command line. where as in k8s we will pass that configuration in `pod.yml` file.
+
+In k8s we have a **wrapper** or a concept that is similar to container but it abstracts the defined commands / arguments in `pod.yml`
+
+A pod is just a wrapper over a container.
+
+In k8s insted of conatiner we deploy a pod, pod can be single container or a multiple container. But instaed of command line args we use `pod.yml`.
+
+### Why pod.yml ?
+
+as k8s is a enterpirse solution it want to bring `declerative capabilities`.
+
+In k8s everything is writeen with yml file.
+
+**A pod can conatin a single continer or a multiple container. If pod container multiple containers k8s provide some advantages.**
+
+If you put group of container in one single pod, then k8s will allo you shared networking, shared resources, this way container a and container b inside a single pod can talk to each other using localhost.
+
+There is a pod and inside that pod we have a container. k8s allocates a **cluster ip address** to the pod and you can access the application inside the pod using **pod cluster ip address**
+
+Ip addresses are generated for the pods not the conatiner. `kube-proxy` will generate the ip address.
+
+
+### Kubectl
+
+In docker when ever we want to run any command we have docker cli. similarly in k8s we have kubectl.
+
+kubectl is command line for k8s.
+
+#### Using kubectl and kubectl
+
+Install kubectl [follow this](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
+
+#### Using kubectl and minikube
+
+To Install minikube [follow this](https://minikube.sigs.k8s.io/docs/start/)
+
+**commands**
+
+#### How minikube works
+
+It will create a VM first, on top of this this will create a single node kubernetes cluster.
+
+
+
+```bash
+minikube start #k8s cluster will be started.
+
+kubectl get nodes # 
+```
+
+working with pods
+
+You can get the syntax from [here](https://kubernetes.io/docs/concepts/workloads/pods/)
+
+```bash
+vim pod.yml
+
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2 
+    ports:
+    - containerPort: 80
+
+# docker run -d --image nginx:1.14.2 --name nginx -p 80:80
+
+kubectl create -f pod.yml # pod will be created
+
+kubectl get pods # docker ps
+
+kunectl get pods -o wide
+
+minukube ssh # Go inside minikube
+
+```
+
+**kubectl cheetsheet [](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)**
+
+How to add auto scaling, auto healing ?
+
+On top of the pod we have a wrapper called `deployment`. So, we have to use `deployment` to use the features like auto healing and auto scaling. 
+
+In production, you will not deploy pods you will deploy deployments.
+
+**Verify the application**
+
+```bash
+kubectl logs nginx
+
+kubectl descibe pod nginx 
+```
 
 </details>
 

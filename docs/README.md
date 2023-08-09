@@ -1935,7 +1935,7 @@ minukube ssh # Go inside minikube
 
 ```
 
-**kubectl cheetsheet [](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)**
+**[kubectl cheetsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)**
 
 How to add auto scaling, auto healing ?
 
@@ -1953,4 +1953,103 @@ kubectl descibe pod nginx
 
 </details>
 
+<details>
+<summary>k8s Deployment</summry>
 
+diff between container pod and deployment ?
+
+pod is somewhat similar to Contaner it just provide a `yml` specification of running the container, or in some cases a pod an run multiple conatiner and those conatiner can share the networking and storage access but the thing **pod dont have** is `auto healing` and `auto scaling` capabilities. 
+
+**Deployment** provide **auto healing and auto scaling**. Deployment will **deploy** a **pod only**, but when you deploy a deployment, it will again `create` some **inter-mediate resource** called **`replica set`** and then replica set will create pod.
+
+Create a pod using a deployment resource. This deployment resource will 1st create a replica set which is the k8s controller and then this will role the pods.
+
+Inside the deployment we can mention the number of replicas that we require.
+
+Auto healing is applied using replica set.
+
+We will create a deployment and this deployment will roll out a replica set and this will create the number of pods mentioned in the deployment yml manifest.
+
+Replica set will ensure what user has provided in the yml manifest, it will ensure the auto healing capibility.
+
+This replica set is the k8s controller(which are used to maintain a desired state) which implements the auto healing feature.
+
+deployment is just a wrapper or a abstraction, replica set maintain the auto healing and auto scaling functions. 
+
+deplyment -> replica set -> pod
+
+Demo
+
+```bash
+
+kubectl get pods
+
+kubectl get deploy
+
+kubectl get all
+
+kubectl get all -A # For all namespaces
+
+kubectl delete pod nginx
+
+vi pod.yml
+```
+
+```yml
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2 
+    ports:
+    - containerPort: 80
+```
+
+```bash
+kubectl apply -f pod.yml # create pod
+
+minikube ssh # coz k8s cluster is minikube
+
+vim deployment.yml
+```
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+```
+
+```bash
+kubectl apply -f deployment.yml
+
+kubectl get deploy
+
+kubectl get pods
+
+kubectl get rs # Get replica set
+
+kubectl get pods -w # watch live pods
+```
+
+</details>

@@ -1954,7 +1954,8 @@ kubectl descibe pod nginx
 </details>
 
 <details>
-<summary>k8s Deployment</summry>
+
+<summary>k8s Deployment</summary>
 
 diff between container pod and deployment ?
 

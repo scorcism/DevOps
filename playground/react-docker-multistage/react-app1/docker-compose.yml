@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  react-app: # service name
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./src:/app/src:ro
+    

@@ -2054,3 +2054,66 @@ kubectl get pods -w # watch live pods
 ```
 
 </details>
+
+<details>
+<summary>k8s - SERVICES</summary>
+
+For each of the deployment we will create a **service**
+
+Why we need **service**
+
+What if there is **no** concept of service 
+- Suppose we have 3 pods in a deployment and 1 of the pod goes down. so, replica set will again roll up the new pod. but, the new pod will have **different** IP address then the previous one. This will make blunder, you will have to again share the new ip to everyone.
+
+There is a concept called **Load balancing**.
+
+So, what you will tell users that, do not access the application with the ip addresse, on **top** of **deployment** we will **create** a **service(svc)**.
+
+Insted of accessing the applciation through ip addresses, users will try to access the applications throught services.
+
+**This service act as a Load balancer**.
+
+It uses a component called as **Kube-proxy**
+
+![eg](https://imgur.com/hbcnXTC.png)
+
+![service](https://imgur.com/RH8b1pA.png)
+
+### Service Discovery
+
+But the question is how, svc manages to get the new ip address and point the routes to the new application with the new ip address.
+
+This is another problem that service solves caalled as **service Discorvery**
+
+What services does is, it does not work with the ip address it make the use od **labels** and **selectors**
+
+Unlike manually keeping track of ip address which can change, services introduced a new mechenism called labels and selectors.
+
+What labels and selectors will do is for **every pod that is getting created**, developers will **apply a label**. This label will be **common** for all he pods
+
+What service will do is it will **watch** for the specific pods with the **specific lables** suppose say login, so service will watch for the pods with label login.
+
+This is the service discorvery mechenism of k8s works.
+
+When you create a deployment, inside the metadata you provide a label. label is just a tag.
+
+![service discovery process](https://imgur.com/IhbMUZt.png)
+
+### Expose to external world
+
+A service can expose the application. 
+
+A service can allow your applition to be accessed by the outside cluster.
+
+Whenever we create a k8s service, we are provided with 3 options
+1. Cluster Ip -> by-default will get discovery and lb
+2. NodePort ->  Allow your application to be accessed inside your organization. Whoever has the ip address of the worker node can access the application.
+3. Load Balancing -> Service will expose the application to extrnal world.
+
+**service advantages**
+
+1. Load Balancing
+2. Service Discovery
+3. Expose to external world
+
+</details>

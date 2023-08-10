@@ -2246,7 +2246,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app.kubernetes.io/name: sample-python-app # same as pod label
+    app: sample-python-app # same as pod label
   ports:
     - port: 80 # Cluster Port
       targetPort: 8000 # Port in which app is running

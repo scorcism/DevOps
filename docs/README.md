@@ -2117,3 +2117,67 @@ Whenever we create a k8s service, we are provided with 3 options
 3. Expose to external world
 
 </details>
+
+<details>
+
+<summary>k8s Interview 1</summary>
+
+**1) What is the difference between Docker and K8s ?** 1 
+   
+Docker is a container platform where as k8s is a container orchestration env that offers capabilities like auto healing, auto scaling, clustering and enterpirse level support like load balancing.
+
+**2) What are the main components of k8s archituecture ?** 1
+    
+We can devide the k8s components in two part
+  1. **Control place** -> API server, scheduler, controller manager, ccm, etcd
+  2. **Data Plane** -> Kubelet, kube-proxy, container runtime(can be dockershim, containerd, crio)
+
+**3)What are the main diff between the Docker swarm and Kubernetes** 0
+
+k8s is better suited for large org as it offer more scalability, network capabilites like policies and huge third party ecosystem support.
+
+**4)What is the diff between Docker container and Kubernetes pod** 1
+
+A pod in k8s is a runtime specification of a conatiner in docker. A pod provides more declarative way of defining using YAML and you can run more than one contaner in pod.
+
+**5) What is a namepsace in k8s** 0
+
+In k8s namepsace is a logical isolation of resources, network policies, rbac and everything.
+
+eg, there are two projects using same k8s cluster. One project can use ns1 and other project can use ns2 without any overlap and authentication problems.
+
+**6) What is the role of kubeproxy** 1
+
+Kube proxy works by maintaining a set of network rules on each node in the cluster, which are updated dynamically as services are added or removed. 
+
+When a client sends a request to a service, the request is intercepted by kube-proxy on the node where it was received.
+
+Kube-proxy then looks up the destination endpoint for the service and routes the request accordingly.
+
+Kube-proxy is an essential component of k8s cluster, as it ensures that services can communicate with each other.
+
+**7) What are the different types of services within k8s?** 1
+
+1. Cluster Ip mode
+2. Nodeport mode
+3. Load balancer mode
+
+**8)What is the diff between NodePort and LoadBalacer type service ?** 1
+
+
+**9)What is the role of kubelet** 1
+
+Kubelet manages the containers that are scheduled to run on that node. It ensures that the containers are running and healthly, and that the resources they need are available.
+
+Kubelet communicates with the k8s API server to get info about the containers that should be running on the node, and then starts and stops the conatiner as needed to maintain the desired state. 
+
+It also monitors the conatiners to ensure that they are running correctly, and restart them if necessary.
+
+**10)Day to Day activities on k8s** 0
+
+manage k8s clusters in the org, and also ensure that applications are deployed in the clister and no issue with the application.
+
+...
+
+</details>
+

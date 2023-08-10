@@ -2269,5 +2269,82 @@ type: NodePort -> type: LoadBalancer
 kubectl get svc
 
 ```
+</details>
+
+<details>
+<summary>k8s - Ingress</summary>
+
+Issues with k8s services are 
+
+  1. Enterprise and TLS load balancing capabilities. It provide load balancing with  robin algo. Missing sticky sessions. TLS based load balancing, Path based load balancing, Host based load balancing, Path based load balancing, Ratio based load balacing.
+  2. If we are creating a service of type Load Balancer, the cloud provider will cost you for each static public ip. For each service, we require static public ip address which are costly.
+
+How Ingress solved the problem ?
+
+eg, we have a pod inside the cluster using yml manifest. We have kubelet will deploy the pod on one of the worker node. APi server will notify the scheduler and kubeleet will deploy the container. 
+Similary, we create a service yml manifest, we have a kube-proxy inside the svc , will update the ip-table rules.
+
+Every resource that we are creating in kubernetes, there is a component that is watching for that resource and it is performing the require action.
+ 
+So, we create **Ingress** in k8s 
+thre has to be a resource, component or controller which has to watch for the ingress, This was the problem. 
+
+k8s create ingress resource, and create a architure where
+
+User will create a ingress resource, load balancing compaines like nginx, f5 etc. they will write their own ingress controllers. They will place the controller on github and they will provide the step on how to install the contaoller and as a user insted of creating just ingress resource, we also have to depoloy ingress controller
+
+Ingress controller is just a Load balancer 
+
+As a user, on a k8s cluster we need to deploy a ingress controller, which ingress controller ? eg nginx or f5 or anything. After that you will create ingress resource depending on the capabilites you need.
+
+### Install and configure ingress
+
+[DOC](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+Host based load balancing
+
+```bash
+vi ingress.yml
+```
+
+```yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-example
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar" # who ever come at foo.bar.com/bar redirect it to service1
+        backend:
+          service:
+            name: service1 # service name
+            port:
+              number: 80 # service port
+```
+
+```bash
+kubectl apply -f ingress.yml
+
+kubectl get ingress
+
+# This will not work coz at this point, we havent created ingress controller.
+```
+**[Install ingress controller](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)**
+
+```bash
+minikube addons enable ingress
+
+kubectl get pods -A 
+
+kubectl logs 
+
+```
+
+On local you need to update the `/etc/hosts` for domain mapping
 
 </details>
+

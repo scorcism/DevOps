@@ -2260,7 +2260,7 @@ kubectl get svc
 
 minikube ip
 
-curl -L http://$(minikube ip):30007 /demo
+curl -L http://$(minikube ip):30007/demo
 
 kubectl edit srv python-sample-app-service
 

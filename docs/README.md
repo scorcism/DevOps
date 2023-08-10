@@ -2181,3 +2181,93 @@ manage k8s clusters in the org, and also ensure that applications are deployed i
 
 </details>
 
+<details>
+<summary>K8s Services</summary>
+
+```bash
+
+git clone https://github.com/iam-veeramalla/Docker-Zero-to-Hero.git
+
+mv /examples/python-web-app .
+
+# remove others
+
+docker build -t scor32k/python-sample-app:v1 .
+
+vi deployment.yml
+
+```
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-python-app #
+  labels:
+    app: sample-python-app #
+spec:
+  replicas: 2 #
+  selector:
+    matchLabels:
+      app: sample-python-app #
+  template:
+    metadata:
+      labels:
+        app: sample-python-app #
+    spec:
+      containers:
+      - name: sample-python-app #
+        image: scor32k/python-sample-app:v1 #
+        ports:
+        - containerPort: 8000 #
+```
+
+```bash
+kubectl apply -f deployment.yml
+
+kubectl get deploy
+
+kubectl get pods
+
+kubectl get pods -v=7 # v=9 max
+
+kubectl get pods -o wide
+```
+
+```bash
+vim service.yml
+```
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-sample-app-service #
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: sample-python-app # same as pod label
+  ports:
+    - port: 80 # Cluster Port
+      targetPort: 8000 # Port in which app is running
+      nodePort: 30007
+```
+
+```bash
+kubectl apply -f service.yml
+kubectl get svc -v=9
+kubectl get svc
+
+minikube ip
+
+curl -L http://$(minikube ip):30007 /demo
+
+kubectl edit srv python-sample-app-service
+
+type: NodePort -> type: LoadBalancer
+
+kubectl get svc
+
+```
+
+</details>

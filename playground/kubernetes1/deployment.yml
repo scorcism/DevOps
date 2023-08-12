@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-deployment
+  labels:
+    app: express
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: expressc
+  template:
+    metadata:
+      labels:
+        app: expressc
+    spec:
+      containers:
+      - name: express-container
+        image: scor32k/express
+        ports:
+        - containerPort: 5000

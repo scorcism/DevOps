@@ -2348,3 +2348,18 @@ On local you need to update the `/etc/hosts` for domain mapping
 
 </details>
 
+<details>
+<summary>Ingress</summary>
+
+
+![ingress](https://imgur.com/vjpOB27.png)
+
+![ingress controller](https://imgur.com/xilwDFD.png)
+
+![]()
+
+![]()
+
+![]()
+
+</details>

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-example
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar" # who ever come at foo.bar.com/bar redirect it to service1
+        backend:
+          service:
+            name: express-service # service name
+            port:
+              number: 80 # service port

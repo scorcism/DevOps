@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: express-pod
+spec:
+  containers:
+  - name: exppress-c
+    image: scor32k/express
+    ports:
+    - containerPort: 5000

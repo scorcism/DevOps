@@ -2356,10 +2356,47 @@ On local you need to update the `/etc/hosts` for domain mapping
 
 ![ingress controller](https://imgur.com/xilwDFD.png)
 
-![]()
-
-![]()
-
-![]()
-
 </details>
+
+<details>
+<summary>RBAC</summary>
+
+**Role Based access control** : Depending upon the role of the user, we will define access.
+Users management or access to user management.
+
+Manging service account. eg suppose we have deployed pod what all services that pod should have access to.
+Similar to user management we can have access to services management.
+
+Can be divided into two part
+1. User management
+2. Managing the access of the services that are running on the cluster.
+
+This are the things that can define RBAC in k8s
+In k8s we have 1. service account / users 2. k8s roles or cluster roles 3. Role binding / cluster role binding
+
+How we create users in k8s ?
+
+k8s doesn't deal with user management, it is done by `Identity Providers`.
+
+In k8s the API server act as a OAuth server, we off load the user management to identity providers like IAM users.
+
+We need IAM OAuth Provider.   
+
+we can create service account.yml
+
+when we have create a pod and have not defined a service account k8s will add default service account to that pod.
+
+
+suppose we created a service and user access the appliction , but how do we define the rules or configrations , to define access k8s supports we have  `role`/`cluster role` and `role binding`/`cluster binding`.
+
+what is role:
+
+a role is a yml file, where we will write all the configs rules like IAM policies, once the config file is done to attach user, service account and role we use `role binding`. 
+
+serivice account <-> role 
+^
+|
+role binding
+![role](https://imgur.com/Vx7bYvf.png)
+
+</details>  

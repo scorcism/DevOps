@@ -2402,5 +2402,23 @@ role binding
 </details>  
 
 <details>
+<summary> Custom resource   </summary>
+
+Custom Resource Defination - crd
+
+To introduce new resources in k8s or to extemd th api of k8s.
+
+CRD: Custom resource Defination. Defining a new type of api to k8s. we have to  submit a custom resource defination to k8s, its a yml file there we will define what user will create. Crd is a yml file which is used to introduce a new type of custom resource to k8s.
+
+CR: Custom resource
+
+
+Custom Controller
+
+![IMG](https://imgur.com/H00qwOA.png)
+
+</details>
+
+<details>
 <summary>  </summary>
 </details>

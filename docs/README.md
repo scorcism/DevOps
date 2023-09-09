@@ -2420,5 +2420,114 @@ Custom Controller
 </details>
 
 <details>
-<summary>  </summary>
+<summary> Config map and secrets </summary>
+
+
+### What is config map?
+Inside k8s we have deal with containers and if we take example ffo three tired arch we have some secrets to store, so in case of conatiners we have `config maps`. 
+So, we can create a conf map inside the k8s cluster and put the info inside the config map and we can use the details of config map inside the k8s pod. 
+
+Config map is solving the issue of storing the information. That can be used by the aplication/pod. 
+
+Here we store non senstive data.
+
+### What are secrets? 
+Secret also solves the same problem, but secrets deal with `sensitive data`.
+In secret the data is encrypted with custom encryption server. With encryption k8s suggest to use strong `RBAC`(LEAST PRIVELIAGE)    
+
+Here we store sensitive data.
+
+
+### Diff between config map and secrets? 
+Both of them are used to store data where as secrets are used to store sensitive data whereas config maps are used for non sensitive information.  
+
+```bash
+vim cm.yml
+apiversion: v1
+kind: CondifMap
+metadata:
+  name: test-cm
+data:
+  db-port: "3306"
+```
+
+```bash
+kubetl apply -f cm.yml
+
+kubectl get cm
+
+kubectl describe cm test-cm
+```
+
+```bash
+vim deployment.yml
+
+env:
+  - name: DB_PORT
+    valueFrom:
+      configMapKeyRef:
+        name: test-cm
+        key: db-port
+
+
+kubectl apply deployment.yml
+```
+
+suppose we wnt to chnage the db-port and if we so by chnaging the yml file it will not reflect in the conatiners so to overcome this k8s suggest to Using `VolumeMounts`. Using volumenmounts insted of using them as env varibale we will use them as files. Becase we aare mounting. The config map values will be saved inside the file.
+
+##### so now Insted of above snippet
+
+```bash
+vim deployment.yml
+```
+
+```yml
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    volumeMounts: 
+      - name: db-connection
+        mountPath: /opt # Inside container where we want to mount the volume 
+    ports:
+      - conatinerPort: xxx
+
+  volumes:
+    - name: db-connection
+      configMap: # the volume db-conn. will info from configMap
+        name: test-cm
+```
+
+```bash
+kubectl apply -f deployment.yml
+
+kubectl extec -it podname -- /bin/bash # Inside the pod
+cat /opt/db-port | more 
+
+
+```
+```yml
+vim cm.yml
+  db-port: "3307"
+
+```
+```bash
+kubectl apply -f cm.yml
+```
+Now the k8s pods without getting restarted, it will chnage the port
+```bash
+kubectl extec -it podname -- /bin/bash # Inside the POD
+```
+
+### SECRETS
+
+```bash
+kubectl crate secret generic test-secret --from-literal=db-port="3306"
+
+kubectl describe secret test-secret
+
+kubectl edit secret test-secret
+```
+
+
 </details>

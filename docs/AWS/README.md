@@ -1107,7 +1107,12 @@ Now, let's explore some real-world use cases to better understand how AWS Lambda
 </details>
 
 
+<details>
+<summary> CloudFront</summary>
 
+Provided the solution for CDN.
+
+</details>
 
 
 

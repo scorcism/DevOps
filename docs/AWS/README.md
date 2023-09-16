@@ -1436,3 +1436,26 @@ $ docker push <account-id>.dkr.ecr.<region>.amazonaws.com/<repo-name>:latest
 
 </details>
 
+<details>
+<summary> Secret Management</summary>
+
+1. Systems Manager
+2. Secrets Manager
+3. Hashicorp vault -> not aws
+
+1. System Manager
+- Parameter store
+Here the data is very easy to retireve. Just need to grant the IAM role.
+eg Storing Docker username or docker registry url
+
+
+2. Secrets Manager
+Sometimes we need to rotate the informations. 
+Rotate ?
+When the information is very secret.
+eg Storing Docker password
+
+3. Hashicorp vault
+works for hybrid cloud architecture
+
+</details>

@@ -2595,7 +2595,6 @@ Grafana supports a wide range of data sources, including databases, time-series 
 In addition to its powerful data visualization and analysis capabilities, Grafana is also highly extensible. It supports a wide range of plugins and integrations, including integrations with popular monitoring and logging tools like Prometheus, Elasticsearch, and InfluxDB.
 
 
-
 # Prometheus Install using Helm
 
 ## Add helm repo
@@ -2632,6 +2631,11 @@ This is required to access prometheus-server using your browser.
 
 ## Expose Grafana Service
 
-`kubectl expose service grafana --type=NodePort — target-port=3000 --name=grafana-ext`
+`kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext`
+
+
+## Expose kube state metrics
+`kubectl expose service prometheus-kube-state-metrics --type=NodePort --target-port=8080 --name=prometheus-kube-state-metrics-ext`
+
 
 </details>

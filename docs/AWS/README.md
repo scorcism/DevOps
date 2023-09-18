@@ -1525,3 +1525,34 @@ Step 4: Monitor and Alert
     If any EC2 instance is found without monitoring enabled, the custom rule's Lambda function will mark it as non-compliant.
 
 </details>
+
+<details>
+<summary>Load balancers</summary>
+
+1. Application Load Balancer
+2. Network Load Balancer
+3. Gaeteway Load Balancer
+
+
+ALB? - L7 load balancer
+If want to perfrom traffic load balancing on application layer or application layer then choose ALB.
+HTTP, HTTPS, FTP types of protocols.
+host, path, domain.
+Intercept the requets.
+Costly load balancer and slow
+
+
+NLB? - L4 load balancer
+If you want to perfom on network i.e layer 4 then use NLB. 
+As at l4 data is transpoted into small small chunks, so its helpfull in game server, youtube and straming platform.
+Want to route when you require low latency, high transmission of data.
+Creates steaky sessions
+Perform routing on TCP and UDP packets.
+Less costly and does not involve any latency.
+
+GLB ? 
+working with virtual appliances. vpn , firewall, applications. 
+adds security
+
+
+</details>

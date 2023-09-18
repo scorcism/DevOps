@@ -1556,3 +1556,55 @@ adds security
 
 
 </details>
+
+<details>
+<summary>Cloud Migrations</summary>
+
+Rehost, replatform, Repurchase, Refactor/ Reacrchitecture, Relocate, Retire, retain
+
+Steps:
+
+### 1. Preparation: 
+Check curr arch, if microserver step done if monolith convert to micro service.
+
+### 2. Planning: 
+Split the services into phases. 
+1) Decide phases
+2) What cloud migration stratigies to choose.
+There are many stretigies some of them are
+
+#### a) Rehost: 
+List and shift, Take micro service and deploy to aws. Taking on premises application and with minimal chnages shifting it to cloud.
+
+#### b) Replatform: 
+Add some chnages, Little chnages and take advantages of cloud services. 
+
+#### c) Refactor/ Rearchitecture Model: 
+Converting monolith to micro services. Re architecturing monolith application to microservices with the best possible services.
+
+#### d) Relocate
+if you using k8s then you will be eks or aks. 
+can be costly, 
+
+#### e) Retain
+Retain some of the application and some to the cloud.
+
+#### f) Retire
+Retire some applications, if no user is using it.
+
+#### g) Repruchase
+
+
+
+### 3. Migrate
+Migraing 
+
+### 4. Monitor
+Monotring the applications. 
+
+### 5. Optimize
+Improve
+
+
+
+</details>

@@ -2269,8 +2269,15 @@ kubectl edit srv python-sample-app-service
 type: NodePort -> type: LoadBalancer
 
 kubectl get svc
-
 ```
+
+### Expose the app
+First We need to expose our deployment so use kubectl expose deployment reddit-clone-deployment --type=NodePort command.
+
+You can test your deployment using curl -L http://192.168.49.2:31000. 192.168.49.2 is a minikube ip & Port 31000 is defined in Service.yml
+
+Then We have to expose our app service kubectl port-forward svc/reddit-clone-service 3000:3000 --address 0.0.0.0 &
+
 </details>
 
 <details>

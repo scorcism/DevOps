@@ -2110,6 +2110,8 @@ Whenever we create a k8s service, we are provided with 3 options
 2. NodePort ->  Allow your application to be accessed inside your organization. Whoever has the ip address of the worker node can access the application.
 3. Load Balancing -> Service will expose the application to extrnal world.
 
+kubectl service service-name --url
+
 **service advantages**
 
 1. Load Balancing
